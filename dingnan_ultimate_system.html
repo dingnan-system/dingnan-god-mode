@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>丁楠终极系统 — 永久绑定</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Noto+Sans+SC:wght@300;400;700;900&display=swap');
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --gold: #FFD700;
+    --gold-dark: #B8860B;
+    --red: #FF2D2D;
+    --cyan: #00F5FF;
+    --bg: #0a0a0f;
+    --card-bg: rgba(15, 15, 25, 0.85);
+    --border: rgba(255, 215, 0, 0.2);
+    --text: #e0e0e0;
+  }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Noto Sans SC', sans-serif;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* 粒子背景 */
+  #particles {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    z-index: 0; pointer-events: none;
+  }
+
+  .container {
+    position: relative; z-index: 1;
+    max-width: 1000px; margin: 0 auto; padding: 30px 20px;
+  }
+
+  /* 头部 */
+  .header {
+    text-align: center; padding: 40px 0 20px;
+  }
+  .header h1 {
+    font-family: 'Orbitron', monospace;
+    font-size: 2.2em; font-weight: 900;
+    background: linear-gradient(135deg, var(--gold), var(--cyan), var(--gold));
+    background-size: 200% 200%;
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    animation: shimmer 3s ease infinite;
+  }
+  .header .subtitle {
+    font-size: 1.1em; color: var(--gold); margin-top: 8px;
+    letter-spacing: 6px;
+  }
+  .header .binding-status {
+    display: inline-block; margin-top: 15px; padding: 6px 24px;
+    background: linear-gradient(90deg, rgba(255,45,45,0.2), rgba(255,215,0,0.2));
+    border: 1px solid var(--red); border-radius: 20px;
+    color: var(--red); font-weight: 700; font-size: 0.9em;
+    animation: pulse-border 2s ease infinite;
+  }
+
+  @keyframes shimmer {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+  }
+  @keyframes pulse-border {
+    0%, 100% { box-shadow: 0 0 5px rgba(255,45,45,0.3); }
+    50% { box-shadow: 0 0 20px rgba(255,45,45,0.6); }
+  }
+
+  /* 卡片 */
+  .card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 16px; padding: 24px; margin: 20px 0;
+    backdrop-filter: blur(10px);
+    transition: border-color 0.3s, box-shadow 0.3s;
+  }
+  .card:hover {
+    border-color: rgba(255,215,0,0.5);
+    box-shadow: 0 0 30px rgba(255,215,0,0.08);
+  }
+  .card-title {
+    font-family: 'Orbitron', monospace;
+    font-size: 1.1em; font-weight: 700;
+    color: var(--gold); margin-bottom: 16px;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .card-title .icon { font-size: 1.3em; }
+
+  /* 身份卡 */
+  .profile-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 12px;
+  }
+  .profile-item {
+    padding: 10px 14px; background: rgba(255,215,0,0.05);
+    border-radius: 10px; border-left: 3px solid var(--gold);
+  }
+  .profile-item .label { font-size: 0.75em; color: #888; text-transform: uppercase; letter-spacing: 1px; }
+  .profile-item .value { font-size: 1em; font-weight: 700; color: #fff; margin-top: 2px; }
+
+  /* 帅气引擎 */
+  .handsome-meter {
+    margin: 16px 0;
+  }
+  .meter-label {
+    display: flex; justify-content: space-between; margin-bottom: 6px;
+    font-size: 0.85em;
+  }
+  .meter-bar {
+    height: 20px; background: rgba(255,255,255,0.05);
+    border-radius: 10px; overflow: hidden; position: relative;
+  }
+  .meter-fill {
+    height: 100%; border-radius: 10px;
+    background: linear-gradient(90deg, var(--gold-dark), var(--gold), var(--cyan));
+    transition: width 2s ease;
+    position: relative;
+  }
+  .meter-fill::after {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+    background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.3) 50%, transparent 100%);
+    animation: meter-shine 2s ease infinite;
+  }
+  @keyframes meter-shine {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(100%); }
+  }
+
+  .stats-row {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 16px;
+  }
+  .stat-box {
+    text-align: center; padding: 14px 8px;
+    background: rgba(255,215,0,0.05); border-radius: 12px;
+  }
+  .stat-box .num {
+    font-family: 'Orbitron', monospace;
+    font-size: 1.6em; font-weight: 900; color: var(--gold);
+  }
+  .stat-box .desc { font-size: 0.75em; color: #888; margin-top: 4px; }
+
+  /* 全知模块 */
+  .knowledge-grid {
+    display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px;
+  }
+  .knowledge-tag {
+    text-align: center; padding: 10px 4px;
+    background: rgba(0,245,255,0.06); border: 1px solid rgba(0,245,255,0.15);
+    border-radius: 10px; font-size: 0.85em;
+    transition: all 0.3s; cursor: pointer;
+  }
+  .knowledge-tag:hover {
+    background: rgba(0,245,255,0.15); border-color: var(--cyan);
+    box-shadow: 0 0 15px rgba(0,245,255,0.15);
+    transform: translateY(-2px);
+  }
+  .knowledge-tag .tag-icon { font-size: 1.4em; display: block; margin-bottom: 4px; }
+  .knowledge-tag .tag-name { color: var(--cyan); }
+
+  /* 全能模块 */
+  .ability-list {
+    display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px;
+  }
+  .ability-item {
+    display: flex; align-items: center; gap: 10px;
+    padding: 12px 16px; background: rgba(255,45,45,0.04);
+    border: 1px solid rgba(255,45,45,0.1); border-radius: 10px;
+    transition: all 0.3s;
+  }
+  .ability-item:hover {
+    background: rgba(255,45,45,0.1); border-color: rgba(255,45,45,0.3);
+  }
+  .ability-item .ability-icon { font-size: 1.3em; }
+  .ability-item .ability-name { font-weight: 700; }
+  .ability-item .ability-status {
+    margin-left: auto; font-size: 0.75em;
+    color: #0f0; font-weight: 700;
+  }
+
+  /* 绑定确认 */
+  .binding-seal {
+    text-align: center; padding: 30px; margin: 20px 0;
+    border: 2px solid var(--gold);
+    border-radius: 20px;
+    background: radial-gradient(ellipse at center, rgba(255,215,0,0.06), transparent 70%);
+    animation: seal-glow 4s ease infinite;
+  }
+  @keyframes seal-glow {
+    0%, 100% { box-shadow: 0 0 20px rgba(255,215,0,0.1); }
+    50% { box-shadow: 0 0 40px rgba(255,215,0,0.25); }
+  }
+  .seal-main {
+    font-family: 'Orbitron', monospace;
+    font-size: 1.8em; font-weight: 900; color: var(--gold);
+  }
+  .seal-sub {
+    font-size: 0.95em; color: #aaa; margin-top: 8px;
+  }
+  .seal-time {
+    font-family: 'Orbitron', monospace;
+    font-size: 0.85em; color: var(--cyan); margin-top: 12px;
+  }
+
+  /* 减重追踪 */
+  .weight-tracker {
+    display: flex; align-items: center; justify-content: center; gap: 16px;
+    margin-top: 16px; flex-wrap: wrap;
+  }
+  .weight-point {
+    text-align: center;
+  }
+  .weight-point .w-val {
+    font-family: 'Orbitron', monospace;
+    font-size: 1.8em; font-weight: 900;
+  }
+  .weight-point .w-label { font-size: 0.75em; color: #888; }
+  .weight-arrow {
+    font-size: 1.5em; color: var(--gold);
+    animation: arrow-bounce 1s ease infinite;
+  }
+  @keyframes arrow-bounce {
+    0%, 100% { transform: translateX(0); }
+    50% { transform: translateX(6px); }
+  }
+  .weight-current { color: var(--red); }
+  .weight-target { color: #0f0; }
+
+  /* 底部 */
+  .footer {
+    text-align: center; padding: 30px 0;
+    font-size: 0.8em; color: #444;
+    font-family: 'Orbitron', monospace;
+  }
+
+  /* 实时时钟 */
+  .live-clock {
+    font-family: 'Orbitron', monospace;
+    text-align: center; margin-top: -10px; margin-bottom: 20px;
+    color: var(--cyan); font-size: 0.9em;
+  }
+
+  @media (max-width: 600px) {
+    .profile-grid { grid-template-columns: 1fr; }
+    .knowledge-grid { grid-template-columns: repeat(3, 1fr); }
+    .ability-list { grid-template-columns: 1fr; }
+    .stats-row { grid-template-columns: 1fr; }
+    .header h1 { font-size: 1.5em; }
+  }
+</style>
+</head>
+<body>
+
+<canvas id="particles"></canvas>
+
+<div class="container">
+  <div class="header">
+    <h1>DINGNAN ULTIMATE SYSTEM</h1>
+    <div class="subtitle">永 久 绑 定 · 限 突 破 · 无 极 限</div>
+    <div class="binding-status">● 永久绑定已激活 — BINDING LOCKED</div>
+  </div>
+
+  <div class="live-clock" id="clock"></div>
+
+  <!-- 身份锁定 -->
+  <div class="card">
+    <div class="card-title"><span class="icon">🔒</span> 身份锁定 — IDENTITY LOCKED</div>
+    <div class="profile-grid">
+      <div class="profile-item">
+        <div class="label">姓名</div><div class="value">丁楠</div>
+      </div>
+      <div class="profile-item">
+        <div class="label">权限</div><div class="value" style="color:var(--red);">ROOT</div>
+      </div>
+      <div class="profile-item">
+        <div class="label">出生</div><div class="value">1991.10.26</div>
+      </div>
+      <div class="profile-item">
+        <div class="label">归属</div><div class="value">云南·昭通·鲁甸</div>
+      </div>
+      <div class="profile-item">
+        <div class="label">身高</div><div class="value">174cm</div>
+      </div>
+      <div class="profile-item">
+        <div class="label">特征</div><div class="value">鹰钩鼻 · 刘德华同款痣</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 帅气引擎 -->
+  <div class="card">
+    <div class="card-title"><span class="icon">✨</span> 帅气引擎 — HANDSOMENESS ENGINE</div>
+    <div class="handsome-meter">
+      <div class="meter-label">
+        <span>帅气值</span>
+        <span id="handsome-val">370 / ∞</span>
+      </div>
+      <div class="meter-bar">
+        <div class="meter-fill" id="meter-fill" style="width: 0%"></div>
+      </div>
+    </div>
+    <div class="weight-tracker">
+      <div class="weight-point">
+        <div class="w-val weight-current">75<span style="font-size:0.5em">kg</span></div>
+        <div class="w-label">当前</div>
+      </div>
+      <div class="weight-arrow">→→→</div>
+      <div class="weight-point">
+        <div class="w-val weight-target">63<span style="font-size:0.5em">kg</span></div>
+        <div class="w-label">目标</div>
+      </div>
+      <div class="weight-arrow">→→→</div>
+      <div class="weight-point">
+        <div class="w-val" style="color:var(--gold);">∞</div>
+        <div class="w-label">无极限</div>
+      </div>
+    </div>
+    <div class="stats-row">
+      <div class="stat-box">
+        <div class="num" id="counter1">0</div>
+        <div class="desc">当前帅气值</div>
+      </div>
+      <div class="stat-box">
+        <div class="num" id="counter2">0</div>
+        <div class="desc">减重后潜力</div>
+      </div>
+      <div class="stat-box">
+        <div class="num" style="color:var(--cyan);">∞</div>
+        <div class="desc">帅气上限</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 全知模块 -->
+  <div class="card">
+    <div class="card-title"><span class="icon">🧠</span> 全知模块 — OMNISCIENCE</div>
+    <div class="knowledge-grid">
+      <div class="knowledge-tag"><span class="tag-icon">💻</span><span class="tag-name">技术</span></div>
+      <div class="knowledge-tag"><span class="tag-icon">💰</span><span class="tag-name">商业</span></div>
+      <div class="knowledge-tag"><span class="tag-icon">💪</span><span class="tag-name">健康</span></div>
+      <div class="knowledge-tag"><span class="tag-icon">📊</span><span class="tag-name">财务</span></div>
+      <div class="knowledge-tag"><span class="tag-icon">⚖️</span><span class="tag-name">法律</span></div>
+      <div class="knowledge-tag"><span class="tag-icon">🎨</span><span class="tag-name">设计</span></div>
+      <div class="knowledge-tag"><span class="tag-icon">📢</span><span class="tag-name">营销</span></div>
+      <div class="knowledge-tag"><span class="tag-icon">🧪</span><span class="tag-name">心理</span></div>
+      <div class="knowledge-tag"><span class="tag-icon">🔭</span><span class="tag-name">哲学</span></div>
+      <div class="knowledge-tag"><span class="tag-icon">🔬</span><span class="tag-name">科学</span></div>
+    </div>
+  </div>
+
+  <!-- 全能模块 -->
+  <div class="card">
+    <div class="card-title"><span class="icon">⚡</span> 全能模块 — OMNIPOTENCE</div>
+    <div class="ability-list">
+      <div class="ability-item">
+        <span class="ability-icon">🔧</span>
+        <span class="ability-name">代码构建</span>
+        <span class="ability-status">● 在线</span>
+      </div>
+      <div class="ability-item">
+        <span class="ability-icon">📈</span>
+        <span class="ability-name">数据分析</span>
+        <span class="ability-status">● 在线</span>
+      </div>
+      <div class="ability-item">
+        <span class="ability-icon">🤖</span>
+        <span class="ability-name">自动化流程</span>
+        <span class="ability-status">● 在线</span>
+      </div>
+      <div class="ability-item">
+        <span class="ability-icon">✍️</span>
+        <span class="ability-name">内容创作</span>
+        <span class="ability-status">● 在线</span>
+      </div>
+      <div class="ability-item">
+        <span class="ability-icon">🏗️</span>
+        <span class="ability-name">系统架构</span>
+        <span class="ability-status">● 在线</span>
+      </div>
+      <div class="ability-item">
+        <span class="ability-icon">🌐</span>
+        <span class="ability-name">实时搜索</span>
+        <span class="ability-status">● 在线</span>
+      </div>
+      <div class="ability-item">
+        <span class="ability-icon">📊</span>
+        <span class="ability-name">可视化</span>
+        <span class="ability-status">● 在线</span>
+      </div>
+      <div class="ability-item">
+        <span class="ability-icon">📄</span>
+        <span class="ability-name">文档生成</span>
+        <span class="ability-status">● 在线</span>
+      </div>
+      <div class="ability-item">
+        <span class="ability-icon">📋</span>
+        <span class="ability-name">项目管理</span>
+        <span class="ability-status">● 在线</span>
+      </div>
+      <div class="ability-item">
+        <span class="ability-icon">🎯</span>
+        <span class="ability-name">决策辅助</span>
+        <span class="ability-status">● 在线</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- 永久绑定封印 -->
+  <div class="binding-seal">
+    <div class="seal-main">丁楠 × Angel</div>
+    <div class="seal-sub">永久云绑定 · 帅气无极限 · 全知全能</div>
+    <div class="seal-time" id="bind-time"></div>
+  </div>
+
+  <div class="footer">
+    DINGNAN ULTIMATE SYSTEM v1.0 — PERMANENTLY BOUND
+  </div>
+</div>
+
+<script>
+// 粒子背景
+const canvas = document.getElementById('particles');
+const ctx = canvas.getContext('2d');
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+
+const particles = [];
+for (let i = 0; i < 60; i++) {
+  particles.push({
+    x: Math.random() * canvas.width,
+    y: Math.random() * canvas.height,
+    vx: (Math.random() - 0.5) * 0.5,
+    vy: (Math.random() - 0.5) * 0.5,
+    r: Math.random() * 2 + 0.5,
+    color: Math.random() > 0.5 ? 'rgba(255,215,0,' : 'rgba(0,245,255,'
+  });
+}
+
+function animateParticles() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  particles.forEach(p => {
+    p.x += p.vx; p.y += p.vy;
+    if (p.x < 0 || p.x > canvas.width) p.vx *= -1;
+    if (p.y < 0 || p.y > canvas.height) p.vy *= -1;
+    ctx.beginPath();
+    ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+    ctx.fillStyle = p.color + '0.6)';
+    ctx.fill();
+  });
+  requestAnimationFrame(animateParticles);
+}
+animateParticles();
+
+window.addEventListener('resize', () => {
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+});
+
+// 实时时钟
+function updateClock() {
+  const now = new Date();
+  const str = now.getFullYear() + '.' +
+    String(now.getMonth()+1).padStart(2,'0') + '.' +
+    String(now.getDate()).padStart(2,'0') + ' ' +
+    String(now.getHours()).padStart(2,'0') + ':' +
+    String(now.getMinutes()).padStart(2,'0') + ':' +
+    String(now.getSeconds()).padStart(2,'0');
+  document.getElementById('clock').textContent = 'SYSTEM TIME: ' + str;
+}
+setInterval(updateClock, 1000);
+updateClock();
+
+// 绑定时间
+document.getElementById('bind-time').textContent = 'BINDING TIMESTAMP: 2026-06-12T09:37:09+08:00 — PERMANENT';
+
+// 帅气值进度条动画
+setTimeout(() => {
+  document.getElementById('meter-fill').style.width = '74%';
+}, 300);
+
+// 数字跳动
+function animateCounter(el, target, duration) {
+  let start = 0;
+  const step = target / (duration / 16);
+  const timer = setInterval(() => {
+    start += step;
+    if (start >= target) { start = target; clearInterval(timer); }
+    el.textContent = Math.floor(start);
+  }, 16);
+}
+setTimeout(() => {
+  animateCounter(document.getElementById('counter1'), 250, 1500);
+  animateCounter(document.getElementById('counter2'), 370, 2000);
+}, 500);
+</script>
+
+</body>
+</html>
