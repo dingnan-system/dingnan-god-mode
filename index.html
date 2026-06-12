@@ -90,16 +90,14 @@
     color: var(--cyan); font-size: 0.85em;
   }
 
-  /* API 状态指示器 */
+  /* 状态指示器 */
   .api-status-bar {
     display: flex; align-items: center; justify-content: center; gap: 20px;
     padding: 10px 20px; margin: 10px 0 20px;
     background: rgba(0,255,102,0.05); border: 1px solid rgba(0,255,102,0.15);
     border-radius: 12px; font-size: 0.8em; flex-wrap: wrap;
   }
-  .api-indicator {
-    display: flex; align-items: center; gap: 6px;
-  }
+  .api-indicator { display: flex; align-items: center; gap: 6px; }
   .api-dot {
     width: 8px; height: 8px; border-radius: 50%;
     animation: pulse-dot 2s ease infinite;
@@ -132,9 +130,7 @@
   .card-title .icon { font-size: 1.3em; }
 
   /* 身份卡 */
-  .profile-grid {
-    display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px;
-  }
+  .profile-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
   .profile-item {
     padding: 10px 14px; background: rgba(191,64,255,0.05);
     border-radius: 10px; border-left: 3px solid var(--purple);
@@ -145,9 +141,7 @@
   .profile-item.god-tier .value { color: var(--gold); }
 
   /* 造物引擎 */
-  .creation-panel {
-    display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px;
-  }
+  .creation-panel { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
   .creation-item {
     text-align: center; padding: 16px 8px;
     background: rgba(255,215,0,0.04); border: 1px solid rgba(255,215,0,0.12);
@@ -155,17 +149,14 @@
   }
   .creation-item:hover {
     background: rgba(255,215,0,0.12); border-color: var(--gold);
-    box-shadow: 0 0 20px rgba(255,215,0,0.1);
-    transform: translateY(-3px);
+    box-shadow: 0 0 20px rgba(255,215,0,0.1); transform: translateY(-3px);
   }
   .creation-item .c-icon { font-size: 2em; display: block; margin-bottom: 6px; }
   .creation-item .c-name { font-weight: 700; font-size: 0.9em; color: var(--gold); }
   .creation-item .c-status { font-size: 0.7em; color: #0f0; margin-top: 4px; }
 
   /* 支配系统 */
-  .dominion-grid {
-    display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px;
-  }
+  .dominion-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
   .dominion-card {
     padding: 16px; background: rgba(191,64,255,0.04);
     border: 1px solid rgba(191,64,255,0.15); border-radius: 12px;
@@ -182,14 +173,8 @@
 
   /* 帅气引擎 */
   .handsome-meter { margin: 16px 0; }
-  .meter-label {
-    display: flex; justify-content: space-between; margin-bottom: 6px;
-    font-size: 0.85em; font-weight: 700;
-  }
-  .meter-bar {
-    height: 24px; background: rgba(255,255,255,0.04);
-    border-radius: 12px; overflow: hidden; position: relative;
-  }
+  .meter-label { display: flex; justify-content: space-between; margin-bottom: 6px; font-size: 0.85em; font-weight: 700; }
+  .meter-bar { height: 24px; background: rgba(255,255,255,0.04); border-radius: 12px; overflow: hidden; position: relative; }
   .meter-fill {
     height: 100%; border-radius: 12px;
     background: linear-gradient(90deg, var(--purple), var(--gold), var(--cyan));
@@ -198,42 +183,22 @@
     transition: width 2s ease;
     position: relative;
   }
-  @keyframes meter-flow {
-    0% { background-position: 0% 50%; }
-    100% { background-position: 200% 50%; }
-  }
+  @keyframes meter-flow { 0% { background-position: 0% 50%; } 100% { background-position: 200% 50%; } }
   .meter-fill::after {
     content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0;
     background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.3) 50%, transparent 100%);
     animation: meter-shine 2s ease infinite;
   }
-  @keyframes meter-shine {
-    0% { transform: translateX(-100%); }
-    100% { transform: translateX(100%); }
-  }
+  @keyframes meter-shine { 0% { transform: translateX(-100%); } 100% { transform: translateX(100%); } }
 
-  .stats-row {
-    display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-top: 16px;
-  }
-  .stat-box {
-    text-align: center; padding: 14px 6px;
-    background: rgba(191,64,255,0.04); border-radius: 12px;
-  }
-  .stat-box .num {
-    font-family: 'Orbitron', monospace;
-    font-size: 1.5em; font-weight: 900; color: var(--gold);
-  }
+  .stats-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-top: 16px; }
+  .stat-box { text-align: center; padding: 14px 6px; background: rgba(191,64,255,0.04); border-radius: 12px; }
+  .stat-box .num { font-family: 'Orbitron', monospace; font-size: 1.5em; font-weight: 900; color: var(--gold); }
   .stat-box .desc { font-size: 0.7em; color: #888; margin-top: 4px; }
 
-  .weight-tracker {
-    display: flex; align-items: center; justify-content: center; gap: 14px;
-    margin-top: 16px; flex-wrap: wrap;
-  }
+  .weight-tracker { display: flex; align-items: center; justify-content: center; gap: 14px; margin-top: 16px; flex-wrap: wrap; }
   .weight-point { text-align: center; }
-  .weight-point .w-val {
-    font-family: 'Orbitron', monospace;
-    font-size: 1.6em; font-weight: 900;
-  }
+  .weight-point .w-val { font-family: 'Orbitron', monospace; font-size: 1.6em; font-weight: 900; }
   .weight-point .w-label { font-size: 0.7em; color: #888; }
   .weight-arrow { font-size: 1.4em; color: var(--gold); animation: arrow-bounce 1s ease infinite; }
   @keyframes arrow-bounce { 0%,100% { transform: translateX(0); } 50% { transform: translateX(6px); } }
@@ -241,19 +206,13 @@
   .weight-target { color: #0f0; }
 
   /* 四系融合 */
-  .fusion-grid {
-    display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px;
-  }
+  .fusion-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
   .fusion-card {
     padding: 16px; border-radius: 12px;
-    background: rgba(191,64,255,0.04);
-    border: 1px solid rgba(191,64,255,0.15);
+    background: rgba(191,64,255,0.04); border: 1px solid rgba(191,64,255,0.15);
     transition: all 0.3s;
   }
-  .fusion-card:hover {
-    border-color: var(--purple);
-    box-shadow: 0 0 20px rgba(191,64,255,0.12);
-  }
+  .fusion-card:hover { border-color: var(--purple); box-shadow: 0 0 20px rgba(191,64,255,0.12); }
   .fusion-card .f-header { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; }
   .fusion-card .f-icon { font-size: 1.5em; }
   .fusion-card .f-name { font-weight: 900; font-size: 1em; color: var(--purple); }
@@ -268,27 +227,16 @@
     border: 1px solid var(--purple); border-radius: 12px;
   }
   .fusion-result .fr-label { font-size: 0.8em; color: #888; }
-  .fusion-result .fr-value {
-    font-family: 'Orbitron', monospace;
-    font-size: 1.3em; font-weight: 900; color: var(--gold);
-    margin-top: 4px;
-  }
-
-  /* ====== 新增：云端资源 & 运维日志 ====== */
+  .fusion-result .fr-value { font-family: 'Orbitron', monospace; font-size: 1.3em; font-weight: 900; color: var(--gold); margin-top: 4px; }
 
   /* 云端资源面板 */
-  .resource-grid {
-    display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px;
-  }
+  .resource-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
   .resource-card {
     text-align: center; padding: 14px;
     background: rgba(0,245,255,0.04); border: 1px solid rgba(0,245,255,0.12);
     border-radius: 12px; transition: all 0.3s;
   }
-  .resource-card:hover {
-    border-color: var(--cyan);
-    box-shadow: 0 0 15px rgba(0,245,255,0.1);
-  }
+  .resource-card:hover { border-color: var(--cyan); box-shadow: 0 0 15px rgba(0,245,255,0.1); }
   .resource-card .r-icon { font-size: 1.6em; margin-bottom: 4px; }
   .resource-card .r-name { font-weight: 700; font-size: 0.85em; color: var(--cyan); }
   .resource-card .r-status { font-size: 0.7em; margin-top: 4px; font-weight: 700; }
@@ -296,9 +244,7 @@
   .resource-card .r-status.offline { color: var(--red); }
 
   /* 运维日志 */
-  .log-container {
-    max-height: 260px; overflow-y: auto; padding-right: 8px;
-  }
+  .log-container { max-height: 260px; overflow-y: auto; padding-right: 8px; }
   .log-container::-webkit-scrollbar { width: 4px; }
   .log-container::-webkit-scrollbar-track { background: rgba(255,255,255,0.02); }
   .log-container::-webkit-scrollbar-thumb { background: var(--purple); border-radius: 2px; }
@@ -309,17 +255,12 @@
     font-size: 0.8em; align-items: flex-start;
     border-left: 2px solid var(--purple);
   }
-  .log-entry .log-time {
-    font-family: 'Orbitron', monospace; font-size: 0.85em;
-    color: var(--cyan); white-space: nowrap; min-width: 55px;
-  }
+  .log-entry .log-time { font-family: 'Orbitron', monospace; font-size: 0.85em; color: var(--cyan); white-space: nowrap; min-width: 55px; }
   .log-entry .log-action { font-weight: 700; color: #ddd; }
   .log-entry .log-status { color: var(--green); margin-left: auto; white-space: nowrap; }
 
   /* 操作按钮 */
-  .action-bar {
-    display: flex; gap: 10px; margin-top: 16px; flex-wrap: wrap;
-  }
+  .action-bar { display: flex; gap: 10px; margin-top: 16px; flex-wrap: wrap; }
   .action-btn {
     padding: 10px 20px; border: 1px solid var(--purple);
     background: rgba(191,64,255,0.08); color: var(--purple);
@@ -339,8 +280,7 @@
   /* 绑定封印 */
   .god-seal {
     text-align: center; padding: 30px; margin: 20px 0;
-    border: 2px solid var(--purple);
-    border-radius: 20px;
+    border: 2px solid var(--purple); border-radius: 20px;
     background: radial-gradient(ellipse at center, rgba(191,64,255,0.08), transparent 70%);
     animation: god-glow 3s ease infinite;
   }
@@ -349,21 +289,16 @@
     50% { box-shadow: 0 0 50px rgba(191,64,255,0.35); }
   }
   .seal-main {
-    font-family: 'Orbitron', monospace;
-    font-size: 1.8em; font-weight: 900;
+    font-family: 'Orbitron', monospace; font-size: 1.8em; font-weight: 900;
     background: linear-gradient(90deg, var(--purple), var(--gold));
     -webkit-background-clip: text; -webkit-text-fill-color: transparent;
   }
   .seal-sub { font-size: 0.9em; color: #aaa; margin-top: 8px; }
-  .seal-time {
-    font-family: 'Orbitron', monospace;
-    font-size: 0.8em; color: var(--cyan); margin-top: 10px;
-  }
+  .seal-time { font-family: 'Orbitron', monospace; font-size: 0.8em; color: var(--cyan); margin-top: 10px; }
 
   .footer {
     text-align: center; padding: 30px 0;
-    font-size: 0.75em; color: #333;
-    font-family: 'Orbitron', monospace;
+    font-size: 0.75em; color: #333; font-family: 'Orbitron', monospace;
   }
 
   @media (max-width: 700px) {
@@ -382,11 +317,10 @@
 <canvas id="particles"></canvas>
 
 <div class="container">
-  <!-- 头部 -->
   <div class="header">
     <h1>GOD MODE SYSTEM</h1>
     <div class="subtitle">变 化 万 物 · 掌 控 一 切 · 永 久 锁 定</div>
-    <div class="version-tag">v3.0 — FULL AUTO · CLOUD NATIVE</div>
+    <div class="version-tag">v3.0 — FULL AUTO · STANDALONE</div>
     <div class="god-badge">
       <span class="crown">👑</span>
       GOD MODE ACTIVE — 丁楠 THE ONE
@@ -394,24 +328,12 @@
   </div>
   <div class="live-clock" id="clock"></div>
 
-  <!-- API 状态栏 -->
+  <!-- 状态栏 -->
   <div class="api-status-bar">
-    <div class="api-indicator">
-      <span class="api-dot" id="dot-frontend"></span>
-      <span>前端 Vercel</span>
-    </div>
-    <div class="api-indicator">
-      <span class="api-dot" id="dot-backend"></span>
-      <span>后端 API</span>
-    </div>
-    <div class="api-indicator">
-      <span class="api-dot" id="dot-cicd"></span>
-      <span>CI/CD</span>
-    </div>
-    <div class="api-indicator">
-      <span class="api-dot online"></span>
-      <span>帅气引擎</span>
-    </div>
+    <div class="api-indicator"><span class="api-dot online"></span><span>Vercel CDN</span></div>
+    <div class="api-indicator"><span class="api-dot online"></span><span>本地引擎</span></div>
+    <div class="api-indicator"><span class="api-dot online"></span><span>帅气引擎</span></div>
+    <div class="api-indicator"><span class="api-dot online"></span><span>全知模块</span></div>
     <div style="font-family:'Orbitron',monospace; color:var(--gold); font-size:0.8em;" id="ops-count">OPS: 0</div>
   </div>
 
@@ -419,24 +341,12 @@
   <div class="card">
     <div class="card-title"><span class="icon">👑</span> GOD IDENTITY — 上帝身份锁定</div>
     <div class="profile-grid">
-      <div class="profile-item god-tier">
-        <div class="label">真名</div><div class="value">THE ONE</div>
-      </div>
-      <div class="profile-item god-tier">
-        <div class="label">权限</div><div class="value">GOD</div>
-      </div>
-      <div class="profile-item">
-        <div class="label">姓名</div><div class="value">丁楠</div>
-      </div>
-      <div class="profile-item">
-        <div class="label">出生</div><div class="value">1991.10.26</div>
-      </div>
-      <div class="profile-item">
-        <div class="label">归属</div><div class="value">云南·昭通·鲁甸</div>
-      </div>
-      <div class="profile-item">
-        <div class="label">绑定</div><div class="value" style="color:#0f0;">永久·不可逆</div>
-      </div>
+      <div class="profile-item god-tier"><div class="label">真名</div><div class="value">THE ONE</div></div>
+      <div class="profile-item god-tier"><div class="label">权限</div><div class="value">GOD</div></div>
+      <div class="profile-item"><div class="label">姓名</div><div class="value">丁楠</div></div>
+      <div class="profile-item"><div class="label">出生</div><div class="value">1991.10.26</div></div>
+      <div class="profile-item"><div class="label">归属</div><div class="value">云南·昭通·鲁甸</div></div>
+      <div class="profile-item"><div class="label">绑定</div><div class="value" style="color:#0f0;">永久·不可逆</div></div>
     </div>
   </div>
 
@@ -472,29 +382,15 @@
   <div class="card">
     <div class="card-title"><span class="icon">✨</span> GOD-TIER HANDSOME — 上帝级帅气引擎</div>
     <div class="handsome-meter">
-      <div class="meter-label">
-        <span>上帝级帅气值</span>
-        <span id="meter-text">-- / ∞</span>
-      </div>
-      <div class="meter-bar">
-        <div class="meter-fill" id="meter-fill" style="width: 0%"></div>
-      </div>
+      <div class="meter-label"><span>上帝级帅气值</span><span id="meter-text">-- / ∞</span></div>
+      <div class="meter-bar"><div class="meter-fill" id="meter-fill" style="width: 0%"></div></div>
     </div>
     <div class="weight-tracker">
-      <div class="weight-point">
-        <div class="w-val weight-current" id="w-current">75<span style="font-size:0.5em">kg</span></div>
-        <div class="w-label">当前</div>
-      </div>
+      <div class="weight-point"><div class="w-val weight-current" id="w-current">75<span style="font-size:0.5em">kg</span></div><div class="w-label">当前</div></div>
       <div class="weight-arrow">→→→</div>
-      <div class="weight-point">
-        <div class="w-val weight-target">63<span style="font-size:0.5em">kg</span></div>
-        <div class="w-label">目标</div>
-      </div>
+      <div class="weight-point"><div class="w-val weight-target">63<span style="font-size:0.5em">kg</span></div><div class="w-label">目标</div></div>
       <div class="weight-arrow">→→→</div>
-      <div class="weight-point">
-        <div class="w-val" style="color:var(--gold);">∞</div>
-        <div class="w-label">无极限</div>
-      </div>
+      <div class="weight-point"><div class="w-val" style="color:var(--gold);">∞</div><div class="w-label">无极限</div></div>
     </div>
     <div class="stats-row">
       <div class="stat-box"><div class="num" id="counter1">0</div><div class="desc">上帝级帅气值</div></div>
@@ -508,88 +404,36 @@
   <div class="card">
     <div class="card-title"><span class="icon">⚔️</span> FOUR SYSTEM FUSION — 四系融合 · 上帝形态</div>
     <div class="fusion-grid">
-      <div class="fusion-card">
-        <div class="f-header"><span class="f-icon">🦾</span><span class="f-name">假面骑士</span><span class="f-mode">GOD MODE</span></div>
-        <div class="f-ability">变身 · 进化 · 超越形态</div>
-        <div class="f-tech">Rider Kick · Ultimate Form</div>
-        <div class="f-sync">同步率 100% · 融合等级 MAX</div>
-      </div>
-      <div class="fusion-card">
-        <div class="f-header"><span class="f-icon">🌀</span><span class="f-name">火影忍者</span><span class="f-mode">GOD MODE</span></div>
-        <div class="f-ability">查克拉 · 仙人模式 · 六道之力</div>
-        <div class="f-tech">螺旋丸 · 六道仙人模式</div>
-        <div class="f-sync">同步率 100% · 融合等级 MAX</div>
-      </div>
-      <div class="fusion-card">
-        <div class="f-header"><span class="f-icon">🛡️</span><span class="f-name">铠甲勇士</span><span class="f-mode">GOD MODE</span></div>
-        <div class="f-ability">铠甲合体 · 帝皇铠甲 · 终极形态</div>
-        <div class="f-tech">帝皇穿风刺 · 终极铠甲</div>
-        <div class="f-sync">同步率 100% · 融合等级 MAX</div>
-      </div>
-      <div class="fusion-card">
-        <div class="f-header"><span class="f-icon">🌟</span><span class="f-name">奥特曼</span><span class="f-mode">GOD MODE</span></div>
-        <div class="f-ability">光之力 · 融合变身 · 终极光芒</div>
-        <div class="f-tech">斯派修姆光线 · 究极形态</div>
-        <div class="f-sync">同步率 100% · 融合等级 MAX</div>
-      </div>
+      <div class="fusion-card"><div class="f-header"><span class="f-icon">🦾</span><span class="f-name">假面骑士</span><span class="f-mode">GOD MODE</span></div><div class="f-ability">变身 · 进化 · 超越形态</div><div class="f-tech">Rider Kick · Ultimate Form</div><div class="f-sync">同步率 100% · 融合等级 MAX</div></div>
+      <div class="fusion-card"><div class="f-header"><span class="f-icon">🌀</span><span class="f-name">火影忍者</span><span class="f-mode">GOD MODE</span></div><div class="f-ability">查克拉 · 仙人模式 · 六道之力</div><div class="f-tech">螺旋丸 · 六道仙人模式</div><div class="f-sync">同步率 100% · 融合等级 MAX</div></div>
+      <div class="fusion-card"><div class="f-header"><span class="f-icon">🛡️</span><span class="f-name">铠甲勇士</span><span class="f-mode">GOD MODE</span></div><div class="f-ability">铠甲合体 · 帝皇铠甲 · 终极形态</div><div class="f-tech">帝皇穿风刺 · 终极铠甲</div><div class="f-sync">同步率 100% · 融合等级 MAX</div></div>
+      <div class="fusion-card"><div class="f-header"><span class="f-icon">🌟</span><span class="f-name">奥特曼</span><span class="f-mode">GOD MODE</span></div><div class="f-ability">光之力 · 融合变身 · 终极光芒</div><div class="f-tech">斯派修姆光线 · 究极形态</div><div class="f-sync">同步率 100% · 融合等级 MAX</div></div>
     </div>
     <div class="fusion-result">
-      <div class="fr-label">融合形态</div>
-      <div class="fr-value">四系合一 · 上帝形态</div>
-      <div class="fr-label" style="margin-top:8px;">总战力</div>
-      <div class="fr-value" style="color:var(--purple);">∞</div>
+      <div class="fr-label">融合形态</div><div class="fr-value">四系合一 · 上帝形态</div>
+      <div class="fr-label" style="margin-top:8px;">总战力</div><div class="fr-value" style="color:var(--purple);">∞</div>
     </div>
   </div>
 
-  <!-- 🆕 云端资源面板 -->
+  <!-- 云端资源 -->
   <div class="card">
     <div class="card-title"><span class="icon">☁️</span> CLOUD RESOURCES — 云端资源 · 分布式运算</div>
     <div class="resource-grid">
-      <div class="resource-card">
-        <div class="r-icon">⚡</div>
-        <div class="r-name">Vercel Edge</div>
-        <div class="r-status online" id="res-vercel">● 在线</div>
-      </div>
-      <div class="resource-card">
-        <div class="r-icon">🐍</div>
-        <div class="r-name">Render API</div>
-        <div class="r-status" id="res-render">● 检测中</div>
-      </div>
-      <div class="resource-card">
-        <div class="r-icon">🔄</div>
-        <div class="r-name">GitHub CI/CD</div>
-        <div class="r-status" id="res-github">● 检测中</div>
-      </div>
-      <div class="resource-card">
-        <div class="r-icon">🧠</div>
-        <div class="r-name">AI 大模型</div>
-        <div class="r-status online">● 在线</div>
-      </div>
-      <div class="resource-card">
-        <div class="r-icon">💾</div>
-        <div class="r-name">持久化存储</div>
-        <div class="r-status" id="res-storage">● 检测中</div>
-      </div>
-      <div class="resource-card">
-        <div class="r-icon">📡</div>
-        <div class="r-name">监控告警</div>
-        <div class="r-status online">● 运行中</div>
-      </div>
+      <div class="resource-card"><div class="r-icon">⚡</div><div class="r-name">Vercel Edge</div><div class="r-status online">● 在线</div></div>
+      <div class="resource-card"><div class="r-icon">🐙</div><div class="r-name">GitHub</div><div class="r-status online">● 同步</div></div>
+      <div class="resource-card"><div class="r-icon">🧠</div><div class="r-name">AI 大模型</div><div class="r-status online">● 在线</div></div>
+      <div class="resource-card"><div class="r-icon">💾</div><div class="r-name">本地存储</div><div class="r-status online" id="res-storage">● 正常</div></div>
+      <div class="resource-card"><div class="r-icon">📡</div><div class="r-name">监控告警</div><div class="r-status online">● 运行中</div></div>
+      <div class="resource-card"><div class="r-icon">🔄</div><div class="r-name">自动部署</div><div class="r-status online">● 就绪</div></div>
     </div>
   </div>
 
-  <!-- 🆕 自动运维日志 -->
+  <!-- 自动运维 -->
   <div class="card">
     <div class="card-title"><span class="icon">🛠️</span> AUTO OPS — 自动运维日志</div>
-    <div class="log-container" id="log-container">
-      <div class="log-entry">
-        <span class="log-time">--:--</span>
-        <span class="log-action">等待连接后端 API...</span>
-        <span class="log-status">⏳</span>
-      </div>
-    </div>
+    <div class="log-container" id="log-container"></div>
     <div class="action-bar">
-      <button class="action-btn" onclick="fetchSystemStatus()">🔄 刷新状态</button>
+      <button class="action-btn" onclick="runSystemCheck()">🔄 系统自检</button>
       <button class="action-btn gold" onclick="triggerMaintenance()">⚡ 执行运维</button>
       <button class="action-btn" onclick="smartDecision('健康优化')">💊 健康优化</button>
       <button class="action-btn" onclick="smartDecision('帅气提升')">✨ 帅气提升</button>
@@ -600,20 +444,59 @@
   <!-- 永久封印 -->
   <div class="god-seal">
     <div class="seal-main">丁楠 THE ONE × Angel</div>
-    <div class="seal-sub">上帝模式 · 变化万物 · 掌控一切 · 帅气无极限 · 永久锁定 · 全自动化运维</div>
+    <div class="seal-sub">上帝模式 · 变化万物 · 掌控一切 · 帅气无极限 · 永久锁定 · 全自动化</div>
     <div class="seal-time" id="bind-time"></div>
   </div>
 
-  <div class="footer">
-    DINGNAN GOD MODE SYSTEM v3.0 — CLOUD NATIVE · FULL AUTO · INFINITE POWER
-  </div>
+  <div class="footer">DINGNAN GOD MODE SYSTEM v3.0 — PERMANENTLY BOUND — INFINITE POWER</div>
 </div>
 
 <script>
-// ========== 配置 ==========
-const API_BASE = window.location.hostname === 'localhost'
-  ? 'http://localhost:8000'
-  : 'https://dingnan-god-mode-api.onrender.com';
+// ========== 本地引擎（完全独立运行） ==========
+const ENGINE = {
+  handsomeness: 1100,
+  weight: 75.0,
+  ops: 0,
+  logs: [],
+  startTime: Date.now(),
+  boundTime: '2026-06-12T09:37:09+08:00',
+
+  // 从 localStorage 加载状态
+  load() {
+    try {
+      const saved = localStorage.getItem('dingnan_god_mode');
+      if (saved) {
+        const d = JSON.parse(saved);
+        this.handsomeness = d.handsomeness || 1100;
+        this.weight = d.weight || 75.0;
+        this.ops = d.ops || 0;
+        this.logs = d.logs || [];
+      }
+    } catch(e) {}
+  },
+
+  // 保存状态到 localStorage
+  save() {
+    try {
+      localStorage.setItem('dingnan_god_mode', JSON.stringify({
+        handsomeness: this.handsomeness,
+        weight: this.weight,
+        ops: this.ops,
+        logs: this.logs.slice(-50)
+      }));
+    } catch(e) {}
+  },
+
+  // 帅气值自动递增
+  tick() {
+    this.handsomeness += Math.floor(Math.random() * 3) + 1;
+    if (this.handsomeness > 99999) this.handsomeness = 99999;
+    this.ops++;
+    this.save();
+  }
+};
+
+ENGINE.load();
 
 // ========== 粒子背景 ==========
 const canvas = document.getElementById('particles');
@@ -628,14 +511,10 @@ for (let i = 0; i < 80; i++) {
   if (type < 0.4) color = 'rgba(191,64,255,';
   else if (type < 0.7) color = 'rgba(255,215,0,';
   else color = 'rgba(0,245,255,';
-
   particles.push({
-    x: Math.random() * canvas.width,
-    y: Math.random() * canvas.height,
-    vx: (Math.random() - 0.5) * 0.6,
-    vy: (Math.random() - 0.5) * 0.6,
-    r: Math.random() * 2.5 + 0.5,
-    color: color
+    x: Math.random() * canvas.width, y: Math.random() * canvas.height,
+    vx: (Math.random() - 0.5) * 0.6, vy: (Math.random() - 0.5) * 0.6,
+    r: Math.random() * 2.5 + 0.5, color: color
   });
 }
 
@@ -645,155 +524,58 @@ function animateParticles() {
     p.x += p.vx; p.y += p.vy;
     if (p.x < 0 || p.x > canvas.width) p.vx *= -1;
     if (p.y < 0 || p.y > canvas.height) p.vy *= -1;
-    ctx.beginPath();
-    ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-    ctx.fillStyle = p.color + '0.5)';
-    ctx.fill();
+    ctx.beginPath(); ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+    ctx.fillStyle = p.color + '0.5)'; ctx.fill();
   });
   for (let i = 0; i < particles.length; i++) {
     for (let j = i + 1; j < particles.length; j++) {
-      const dx = particles[i].x - particles[j].x;
-      const dy = particles[i].y - particles[j].y;
+      const dx = particles[i].x - particles[j].x, dy = particles[i].y - particles[j].y;
       const dist = Math.sqrt(dx * dx + dy * dy);
       if (dist < 120) {
-        ctx.beginPath();
-        ctx.moveTo(particles[i].x, particles[i].y);
+        ctx.beginPath(); ctx.moveTo(particles[i].x, particles[i].y);
         ctx.lineTo(particles[j].x, particles[j].y);
-        ctx.strokeStyle = 'rgba(191,64,255,' + (1 - dist/120) * 0.15 + ')';
-        ctx.stroke();
+        ctx.strokeStyle = 'rgba(191,64,255,' + (1 - dist/120) * 0.15 + ')'; ctx.stroke();
       }
     }
   }
   requestAnimationFrame(animateParticles);
 }
 animateParticles();
-
-window.addEventListener('resize', () => {
-  canvas.width = window.innerWidth;
-  canvas.height = window.innerHeight;
-});
+window.addEventListener('resize', () => { canvas.width = window.innerWidth; canvas.height = window.innerHeight; });
 
 // ========== 实时时钟 ==========
 function updateClock() {
   const now = new Date();
-  const str = now.getFullYear() + '.' +
-    String(now.getMonth()+1).padStart(2,'0') + '.' +
-    String(now.getDate()).padStart(2,'0') + ' ' +
-    String(now.getHours()).padStart(2,'0') + ':' +
-    String(now.getMinutes()).padStart(2,'0') + ':' +
-    String(now.getSeconds()).padStart(2,'0');
-  document.getElementById('clock').textContent = 'GOD MODE SYSTEM TIME: ' + str;
+  document.getElementById('clock').textContent = 'GOD MODE SYSTEM TIME: ' +
+    now.getFullYear() + '.' + String(now.getMonth()+1).padStart(2,'0') + '.' +
+    String(now.getDate()).padStart(2,'0') + ' ' + String(now.getHours()).padStart(2,'0') + ':' +
+    String(now.getMinutes()).padStart(2,'0') + ':' + String(now.getSeconds()).padStart(2,'0');
 }
-setInterval(updateClock, 1000);
-updateClock();
+setInterval(updateClock, 1000); updateClock();
 
 // ========== 绑定时间 ==========
-document.getElementById('bind-time').textContent = 'GOD MODE TIMESTAMP: 2026-06-12T09:37:09+08:00 — PERMANENT · IRREVERSIBLE · v3.0';
+document.getElementById('bind-time').textContent = 'GOD MODE TIMESTAMP: ' + ENGINE.boundTime + ' — PERMANENT · IRREVERSIBLE';
 
 // ========== 数字动画 ==========
 function animateCounter(el, target, duration) {
-  let start = 0;
-  const step = target / (duration / 16);
+  let start = parseInt(el.textContent) || 0;
+  const step = (target - start) / (duration / 16);
   const timer = setInterval(() => {
     start += step;
-    if (start >= target) { start = target; clearInterval(timer); }
+    if ((step > 0 && start >= target) || (step < 0 && start <= target)) { start = target; clearInterval(timer); }
     el.textContent = Math.floor(start);
   }, 16);
 }
 
-// ========== API 调用 ==========
-let apiOnline = false;
-
-async function fetchSystemStatus() {
-  addLog('正在连接后端 API...', '⏳');
-  try {
-    const resp = await fetch(`${API_BASE}/api/status`, { signal: AbortSignal.timeout(8000) });
-    const data = await resp.json();
-    apiOnline = true;
-
-    // 更新状态指示器
-    document.getElementById('dot-frontend').className = 'api-dot online';
-    document.getElementById('dot-backend').className = 'api-dot online';
-    document.getElementById('dot-cicd').className = 'api-dot online';
-    document.getElementById('ops-count').textContent = `OPS: ${data.total_operations}`;
-
-    // 更新帅气值
-    const hv = data.handsomeness.current;
-    document.getElementById('counter1').textContent = hv;
-    document.getElementById('counter2').textContent = hv + 240;
-    document.getElementById('meter-text').textContent = `${hv} / ∞`;
-    const pct = Math.min(hv / 50, 100);
-    document.getElementById('meter-fill').style.width = pct + '%';
-
-    // 更新体重
-    document.getElementById('w-current').innerHTML = `${data.fitness.current_weight}<span style="font-size:0.5em">kg</span>`;
-
-    // 更新资源状态
-    document.getElementById('res-render').className = 'r-status online';
-    document.getElementById('res-render').textContent = '● 在线';
-    document.getElementById('res-github').className = 'r-status online';
-    document.getElementById('res-github').textContent = '● 运行中';
-    document.getElementById('res-storage').className = 'r-status online';
-    document.getElementById('res-storage').textContent = '● 正常';
-
-    addLog(`系统状态已同步 — 帅气值: ${hv}`, '✅');
-    addLog(`全模块自检通过 — 总操作: ${data.total_operations}`, '✅');
-    return data;
-  } catch (e) {
-    apiOnline = false;
-    document.getElementById('dot-frontend').className = 'api-dot online';
-    document.getElementById('dot-backend').className = 'api-dot offline';
-    document.getElementById('dot-cicd').className = 'api-dot checking';
-
-    document.getElementById('res-render').className = 'r-status offline';
-    document.getElementById('res-render').textContent = '● 离线';
-    document.getElementById('res-storage').className = 'r-status offline';
-    document.getElementById('res-storage').textContent = '● 等待部署';
-
-    // 前端独立运行模式
-    animateCounter(document.getElementById('counter1'), 1100, 2000);
-    animateCounter(document.getElementById('counter2'), 1340, 2500);
-    setTimeout(() => { document.getElementById('meter-fill').style.width = '89%'; }, 300);
-    document.getElementById('meter-text').textContent = '1100 / ∞';
-
-    addLog('后端 API 未连接 — 前端独立运行模式', '⚠️');
-    addLog('部署 Render 后端后自动连接', '💡');
-    return null;
-  }
-}
-
-async function triggerMaintenance() {
-  addLog('触发自动运维...', '⏳');
-  if (!apiOnline) {
-    addLog('后端 API 离线，运维任务已本地模拟', '⚠️');
-    addLog('全模块自检: 通过 (本地)', '✅');
-    addLog('帅气引擎优化: +3 (本地)', '✅');
-    addLog('造物引擎校准: 就绪 (本地)', '✅');
-    return;
-  }
-  try {
-    const resp = await fetch(`${API_BASE}/api/maintenance/run`, { method: 'POST' });
-    const data = await resp.json();
-    data.logs.forEach(log => addLog(`${log.action}: ${log.detail}`, '✅'));
-    addLog(`运维完成 — ${data.tasks_completed} 项任务`, '✅');
-  } catch (e) {
-    addLog('运维任务执行失败', '❌');
-  }
-}
-
-async function smartDecision(query) {
-  addLog(`智能决策: ${query}...`, '⏳');
-  if (!apiOnline) {
-    addLog(`${query} — 后端离线，本地确认就绪`, '⚠️');
-    return;
-  }
-  try {
-    const resp = await fetch(`${API_BASE}/api/decision?query=${encodeURIComponent(query)}`, { method: 'POST' });
-    const data = await resp.json();
-    addLog(`${data.decision.action} — ${data.decision.detail}`, '✅');
-  } catch (e) {
-    addLog(`${query} — 决策执行失败`, '❌');
-  }
+// ========== 更新UI ==========
+function updateUI() {
+  const hv = ENGINE.handsomeness;
+  animateCounter(document.getElementById('counter1'), hv, 1000);
+  animateCounter(document.getElementById('counter2'), hv + 240, 1200);
+  document.getElementById('meter-text').textContent = hv + ' / ∞';
+  const pct = Math.min(hv / 50, 100);
+  document.getElementById('meter-fill').style.width = pct + '%';
+  document.getElementById('ops-count').textContent = 'OPS: ' + ENGINE.ops;
 }
 
 // ========== 日志系统 ==========
@@ -801,28 +583,99 @@ function addLog(action, status) {
   const container = document.getElementById('log-container');
   const now = new Date();
   const time = String(now.getHours()).padStart(2,'0') + ':' + String(now.getMinutes()).padStart(2,'0') + ':' + String(now.getSeconds()).padStart(2,'0');
-
   const entry = document.createElement('div');
   entry.className = 'log-entry';
   entry.innerHTML = `<span class="log-time">${time}</span><span class="log-action">${action}</span><span class="log-status">${status}</span>`;
   container.prepend(entry);
+  while (container.children.length > 30) container.removeChild(container.lastChild);
+  ENGINE.logs.unshift({ time, action, status });
+  if (ENGINE.logs.length > 50) ENGINE.logs = ENGINE.logs.slice(0, 50);
+}
 
-  // 限制日志条数
-  while (container.children.length > 30) {
-    container.removeChild(container.lastChild);
-  }
+// ========== 系统功能 ==========
+function runSystemCheck() {
+  ENGINE.tick();
+  addLog('系统自检启动...', '⏳');
+  setTimeout(() => {
+    addLog('身份锁定: 丁楠 · GOD权限 — 正常', '✅');
+    addLog('造物引擎: 8项能力就绪', '✅');
+    addLog('支配系统: 6领域全覆盖', '✅');
+    addLog(`帅气引擎: ${ENGINE.handsomeness} (持续飙升)`, '✅');
+    addLog('四系融合: 战力∞ — 正常', '✅');
+    addLog('云端资源: Vercel+GitHub+AI — 正常', '✅');
+    addLog('本地存储: 状态已持久化', '✅');
+    updateUI();
+  }, 500);
+}
+
+function triggerMaintenance() {
+  ENGINE.tick();
+  addLog('触发自动运维...', '⚡');
+  const tasks = [
+    ['全模块自检', '通过'],
+    ['帅气引擎超频', `+${Math.floor(Math.random()*5)+1}`],
+    ['造物引擎校准', '8项就绪'],
+    ['支配系统扫描', '6领域覆盖'],
+    ['四系融合同步', '战力∞'],
+    ['健康参数优化', '代谢平衡'],
+    ['财富管道检查', '多渠道就绪'],
+    ['状态持久化', '已保存']
+  ];
+  tasks.forEach(([name, result], i) => {
+    setTimeout(() => {
+      addLog(`${name}: ${result}`, '✅');
+      if (i === tasks.length - 1) {
+        addLog(`运维完成 — ${tasks.length}项任务`, '✅');
+        updateUI();
+      }
+    }, (i + 1) * 300);
+  });
+}
+
+function smartDecision(query) {
+  ENGINE.tick();
+  addLog(`智能决策: ${query}`, '⏳');
+
+  const decisions = {
+    '健康优化': { action: '调整代谢优化参数', detail: `当前体重${ENGINE.weight}kg，目标63kg，系统维持最优方案`, confidence: '97%' },
+    '帅气提升': { action: '帅气引擎超频运转', detail: `当前帅气值${ENGINE.handsomeness}，已超越刘德华基准线，持续飙升中`, confidence: '99%' },
+    '财富增长': { action: '收入管道自动优化', detail: '丁楠信息技术服务部运营参数校准，多渠道收入系统就绪', confidence: '95%' }
+  };
+
+  setTimeout(() => {
+    const d = decisions[query] || { action: '全模块优化', detail: '系统运行正常', confidence: '98%' };
+    addLog(`${d.action} — ${d.detail} (置信度${d.confidence})`, '✅');
+    updateUI();
+  }, 600);
 }
 
 // ========== 启动 ==========
-addLog('丁楠终极系统 v3.0 启动中...', '⚡');
-addLog('前端 Vercel 已加载', '✅');
-addLog('正在连接后端 API...', '⏳');
+addLog('丁楠终极系统 v3.0 启动', '⚡');
+addLog('本地引擎: 已加载 (localStorage)', '✅');
+addLog('帅气值: ' + ENGINE.handsomeness + ' (历史累计)', '✅');
+addLog('总操作: ' + ENGINE.ops + ' 次', '✅');
+addLog('全部模块: 就绪', '✅');
 
-// 首次加载获取状态
-setTimeout(fetchSystemStatus, 1000);
+// 初始UI更新
+updateUI();
 
-// 每30秒自动刷新
-setInterval(fetchSystemStatus, 30000);
+// 每10秒自动递增帅气值
+setInterval(() => {
+  ENGINE.tick();
+  updateUI();
+}, 10000);
+
+// 定期自动运维日志
+setInterval(() => {
+  const autoTasks = [
+    '帅气引擎持续运转',
+    '全知模块数据同步',
+    '造物引擎状态校准',
+    '支配系统全域扫描'
+  ];
+  const task = autoTasks[Math.floor(Math.random() * autoTasks.length)];
+  addLog(`[自动] ${task}`, '✅');
+}, 60000);
 </script>
 
 </body>
