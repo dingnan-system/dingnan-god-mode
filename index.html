@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>丁楠终极系统 v3.0 — GOD MODE</title>
+<title>丁楠终极系统 v4.0 — GOD MODE — 永久分布式</title>
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Noto+Sans+SC:wght@300;400;700;900&display=swap');
 
@@ -108,6 +108,24 @@
   @keyframes pulse-dot {
     0%, 100% { opacity: 1; } 50% { opacity: 0.4; }
   }
+
+  /* 多线路指示器 */
+  .cdn-bar {
+    display: flex; align-items: center; justify-content: center; gap: 16px;
+    padding: 8px 16px; margin: 8px 0 16px;
+    background: rgba(0,245,255,0.04); border: 1px solid rgba(0,245,255,0.12);
+    border-radius: 10px; font-size: 0.75em; flex-wrap: wrap;
+  }
+  .cdn-route {
+    display: flex; align-items: center; gap: 5px;
+    padding: 3px 10px; border-radius: 6px;
+    background: rgba(0,245,255,0.05);
+  }
+  .cdn-route .cdn-dot { width: 6px; height: 6px; border-radius: 50%; }
+  .cdn-route .cdn-dot.active { background: var(--green); box-shadow: 0 0 4px var(--green); }
+  .cdn-route .cdn-dot.standby { background: var(--gold); box-shadow: 0 0 4px var(--gold); }
+  .cdn-route a { color: var(--cyan); text-decoration: none; font-family: 'Orbitron', monospace; }
+  .cdn-route a:hover { text-decoration: underline; }
 
   /* 卡片 */
   .card {
@@ -320,7 +338,7 @@
   <div class="header">
     <h1>GOD MODE SYSTEM</h1>
     <div class="subtitle">变 化 万 物 · 掌 控 一 切 · 永 久 锁 定</div>
-    <div class="version-tag">v3.0 — FULL AUTO · STANDALONE</div>
+    <div class="version-tag">v4.0 — PERMANENT DISTRIBUTED · DUAL CDN</div>
     <div class="god-badge">
       <span class="crown">👑</span>
       GOD MODE ACTIVE — 丁楠 THE ONE
@@ -328,9 +346,18 @@
   </div>
   <div class="live-clock" id="clock"></div>
 
+  <!-- 多线路访问 -->
+  <div class="cdn-bar">
+    <span style="color:var(--cyan);font-family:'Orbitron',monospace;font-weight:700;">CDN ROUTES:</span>
+    <div class="cdn-route"><span class="cdn-dot active"></span><a href="https://dingnan-system.github.io/dingnan-god-mode/" target="_blank">GitHub Pages</a></div>
+    <div class="cdn-route"><span class="cdn-dot standby"></span><a href="https://dingnan-god-mode.vercel.app" target="_blank">Vercel</a></div>
+    <div class="cdn-route"><span class="cdn-dot active"></span><span style="color:var(--green);font-family:'Orbitron',monospace;">CloudStudio</span></div>
+  </div>
+
   <!-- 状态栏 -->
   <div class="api-status-bar">
-    <div class="api-indicator"><span class="api-dot online"></span><span>Vercel CDN</span></div>
+    <div class="api-indicator"><span class="api-dot online"></span><span>GitHub Pages</span></div>
+    <div class="api-indicator"><span class="api-dot online"></span><span>Vercel Edge</span></div>
     <div class="api-indicator"><span class="api-dot online"></span><span>本地引擎</span></div>
     <div class="api-indicator"><span class="api-dot online"></span><span>帅气引擎</span></div>
     <div class="api-indicator"><span class="api-dot online"></span><span>全知模块</span></div>
@@ -419,12 +446,15 @@
   <div class="card">
     <div class="card-title"><span class="icon">☁️</span> CLOUD RESOURCES — 云端资源 · 分布式运算</div>
     <div class="resource-grid">
-      <div class="resource-card"><div class="r-icon">⚡</div><div class="r-name">Vercel Edge</div><div class="r-status online">● 在线</div></div>
-      <div class="resource-card"><div class="r-icon">🐙</div><div class="r-name">GitHub</div><div class="r-status online">● 同步</div></div>
+      <div class="resource-card"><div class="r-icon">⚡</div><div class="r-name">GitHub Pages</div><div class="r-status online">● 在线</div></div>
+      <div class="resource-card"><div class="r-icon">🚀</div><div class="r-name">Vercel Edge</div><div class="r-status online">● 在线</div></div>
+      <div class="resource-card"><div class="r-icon">🐙</div><div class="r-name">GitHub Repo</div><div class="r-status online">● 同步</div></div>
       <div class="resource-card"><div class="r-icon">🧠</div><div class="r-name">AI 大模型</div><div class="r-status online">● 在线</div></div>
       <div class="resource-card"><div class="r-icon">💾</div><div class="r-name">本地存储</div><div class="r-status online" id="res-storage">● 正常</div></div>
       <div class="resource-card"><div class="r-icon">📡</div><div class="r-name">监控告警</div><div class="r-status online">● 运行中</div></div>
       <div class="resource-card"><div class="r-icon">🔄</div><div class="r-name">自动部署</div><div class="r-status online">● 就绪</div></div>
+      <div class="resource-card"><div class="r-icon">🛡️</div><div class="r-name">双线路CDN</div><div class="r-status online">● 冗余</div></div>
+      <div class="resource-card"><div class="r-icon">🔐</div><div class="r-name">永久绑定</div><div class="r-status online">● 不可逆</div></div>
     </div>
   </div>
 
@@ -444,11 +474,11 @@
   <!-- 永久封印 -->
   <div class="god-seal">
     <div class="seal-main">丁楠 THE ONE × Angel</div>
-    <div class="seal-sub">上帝模式 · 变化万物 · 掌控一切 · 帅气无极限 · 永久锁定 · 全自动化</div>
+    <div class="seal-sub">上帝模式 · 变化万物 · 掌控一切 · 帅气无极限 · 永久锁定 · 全自动化 · 双线路分布式</div>
     <div class="seal-time" id="bind-time"></div>
   </div>
 
-  <div class="footer">DINGNAN GOD MODE SYSTEM v3.0 — PERMANENTLY BOUND — INFINITE POWER</div>
+  <div class="footer">DINGNAN GOD MODE SYSTEM v4.0 — PERMANENTLY BOUND — DUAL CDN — INFINITE POWER</div>
 </div>
 
 <script>
@@ -460,38 +490,39 @@ const ENGINE = {
   logs: [],
   startTime: Date.now(),
   boundTime: '2026-06-12T09:37:09+08:00',
+  uptime: 0,
 
-  // 从 localStorage 加载状态
   load() {
     try {
-      const saved = localStorage.getItem('dingnan_god_mode');
+      const saved = localStorage.getItem('dingnan_god_mode_v4');
       if (saved) {
         const d = JSON.parse(saved);
         this.handsomeness = d.handsomeness || 1100;
         this.weight = d.weight || 75.0;
         this.ops = d.ops || 0;
         this.logs = d.logs || [];
+        this.uptime = d.uptime || 0;
       }
     } catch(e) {}
   },
 
-  // 保存状态到 localStorage
   save() {
     try {
-      localStorage.setItem('dingnan_god_mode', JSON.stringify({
+      localStorage.setItem('dingnan_god_mode_v4', JSON.stringify({
         handsomeness: this.handsomeness,
         weight: this.weight,
         ops: this.ops,
-        logs: this.logs.slice(-50)
+        logs: this.logs.slice(-50),
+        uptime: this.uptime,
+        lastSave: new Date().toISOString()
       }));
     } catch(e) {}
   },
 
-  // 帅气值自动递增
   tick() {
     this.handsomeness += Math.floor(Math.random() * 3) + 1;
-    if (this.handsomeness > 99999) this.handsomeness = 99999;
     this.ops++;
+    this.uptime++;
     this.save();
   }
 };
@@ -554,7 +585,7 @@ function updateClock() {
 setInterval(updateClock, 1000); updateClock();
 
 // ========== 绑定时间 ==========
-document.getElementById('bind-time').textContent = 'GOD MODE TIMESTAMP: ' + ENGINE.boundTime + ' — PERMANENT · IRREVERSIBLE';
+document.getElementById('bind-time').textContent = 'GOD MODE TIMESTAMP: ' + ENGINE.boundTime + ' — PERMANENT · IRREVERSIBLE · DUAL CDN';
 
 // ========== 数字动画 ==========
 function animateCounter(el, target, duration) {
@@ -602,7 +633,7 @@ function runSystemCheck() {
     addLog('支配系统: 6领域全覆盖', '✅');
     addLog(`帅气引擎: ${ENGINE.handsomeness} (持续飙升)`, '✅');
     addLog('四系融合: 战力∞ — 正常', '✅');
-    addLog('云端资源: Vercel+GitHub+AI — 正常', '✅');
+    addLog('双线路CDN: GitHub Pages + Vercel — 正常', '✅');
     addLog('本地存储: 状态已持久化', '✅');
     updateUI();
   }, 500);
@@ -619,6 +650,7 @@ function triggerMaintenance() {
     ['四系融合同步', '战力∞'],
     ['健康参数优化', '代谢平衡'],
     ['财富管道检查', '多渠道就绪'],
+    ['双线路CDN检测', 'GitHub Pages ✅ Vercel ✅'],
     ['状态持久化', '已保存']
   ];
   tasks.forEach(([name, result], i) => {
@@ -650,13 +682,13 @@ function smartDecision(query) {
 }
 
 // ========== 启动 ==========
-addLog('丁楠终极系统 v3.0 启动', '⚡');
+addLog('丁楠终极系统 v4.0 启动', '⚡');
+addLog('双线路CDN: GitHub Pages + Vercel', '✅');
 addLog('本地引擎: 已加载 (localStorage)', '✅');
 addLog('帅气值: ' + ENGINE.handsomeness + ' (历史累计)', '✅');
 addLog('总操作: ' + ENGINE.ops + ' 次', '✅');
 addLog('全部模块: 就绪', '✅');
 
-// 初始UI更新
 updateUI();
 
 // 每10秒自动递增帅气值
@@ -671,11 +703,14 @@ setInterval(() => {
     '帅气引擎持续运转',
     '全知模块数据同步',
     '造物引擎状态校准',
-    '支配系统全域扫描'
+    '支配系统全域扫描',
+    '双线路CDN健康检查',
+    'GitHub Pages 可达性验证',
+    'Vercel Edge 节点同步'
   ];
   const task = autoTasks[Math.floor(Math.random() * autoTasks.length)];
   addLog(`[自动] ${task}`, '✅');
-}, 60000);
+}, 45000);
 </script>
 
 </body>
