@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>丁楠上帝模式 — GOD MODE</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Noto+Sans+SC:wght@300;400;700;900&display=swap');
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --gold: #FFD700;
+    --gold-dark: #B8860B;
+    --red: #FF2D2D;
+    --cyan: #00F5FF;
+    --purple: #BF40FF;
+    --bg: #05050a;
+    --card-bg: rgba(12, 12, 22, 0.9);
+    --border: rgba(191, 64, 255, 0.25);
+    --text: #e0e0e0;
+    --god-glow: rgba(191, 64, 255, 0.5);
+  }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Noto Sans SC', sans-serif;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  #particles {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    z-index: 0; pointer-events: none;
+  }
+
+  .container {
+    position: relative; z-index: 1;
+    max-width: 1050px; margin: 0 auto; padding: 30px 20px;
+  }
+
+  /* 头部 */
+  .header {
+    text-align: center; padding: 40px 0 15px;
+  }
+  .header h1 {
+    font-family: 'Orbitron', monospace;
+    font-size: 2.4em; font-weight: 900;
+    background: linear-gradient(135deg, var(--purple), var(--gold), var(--cyan), var(--purple));
+    background-size: 300% 300%;
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    animation: shimmer 3s ease infinite;
+  }
+  .header .subtitle {
+    font-size: 1.15em; color: var(--purple); margin-top: 8px;
+    letter-spacing: 8px; font-weight: 700;
+  }
+  .god-badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    margin-top: 15px; padding: 8px 28px;
+    background: linear-gradient(90deg, rgba(191,64,255,0.2), rgba(255,215,0,0.2), rgba(191,64,255,0.2));
+    background-size: 200% 100%;
+    animation: badge-slide 3s linear infinite;
+    border: 1px solid var(--purple); border-radius: 25px;
+    color: var(--purple); font-weight: 900; font-size: 0.95em;
+    text-shadow: 0 0 10px rgba(191,64,255,0.5);
+  }
+  @keyframes badge-slide {
+    0% { background-position: 0% 50%; }
+    100% { background-position: 200% 50%; }
+  }
+  .god-badge .crown { font-size: 1.2em; }
+
+  @keyframes shimmer {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+  }
+
+  .live-clock {
+    font-family: 'Orbitron', monospace;
+    text-align: center; margin-top: 8px; margin-bottom: 20px;
+    color: var(--cyan); font-size: 0.85em;
+  }
+
+  /* 卡片 */
+  .card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 16px; padding: 24px; margin: 18px 0;
+    backdrop-filter: blur(10px);
+    transition: all 0.3s;
+  }
+  .card:hover {
+    border-color: rgba(191,64,255,0.5);
+    box-shadow: 0 0 40px rgba(191,64,255,0.08);
+  }
+  .card-title {
+    font-family: 'Orbitron', monospace;
+    font-size: 1.05em; font-weight: 700;
+    color: var(--purple); margin-bottom: 16px;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .card-title .icon { font-size: 1.3em; }
+
+  /* 身份卡 */
+  .profile-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px;
+  }
+  .profile-item {
+    padding: 10px 14px; background: rgba(191,64,255,0.05);
+    border-radius: 10px; border-left: 3px solid var(--purple);
+  }
+  .profile-item .label { font-size: 0.7em; color: #666; text-transform: uppercase; letter-spacing: 1px; }
+  .profile-item .value { font-size: 0.95em; font-weight: 700; color: #fff; margin-top: 2px; }
+  .profile-item.god-tier { border-left-color: var(--gold); background: rgba(255,215,0,0.06); }
+  .profile-item.god-tier .value { color: var(--gold); }
+
+  /* 造物引擎 */
+  .creation-panel {
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px;
+  }
+  .creation-item {
+    text-align: center; padding: 16px 8px;
+    background: rgba(255,215,0,0.04); border: 1px solid rgba(255,215,0,0.12);
+    border-radius: 12px; transition: all 0.3s; cursor: pointer;
+  }
+  .creation-item:hover {
+    background: rgba(255,215,0,0.12); border-color: var(--gold);
+    box-shadow: 0 0 20px rgba(255,215,0,0.1);
+    transform: translateY(-3px);
+  }
+  .creation-item .c-icon { font-size: 2em; display: block; margin-bottom: 6px; }
+  .creation-item .c-name { font-weight: 700; font-size: 0.9em; color: var(--gold); }
+  .creation-item .c-status { font-size: 0.7em; color: #0f0; margin-top: 4px; }
+
+  /* 支配系统 */
+  .dominion-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px;
+  }
+  .dominion-card {
+    padding: 16px; background: rgba(191,64,255,0.04);
+    border: 1px solid rgba(191,64,255,0.15); border-radius: 12px;
+    text-align: center; transition: all 0.3s;
+  }
+  .dominion-card:hover {
+    background: rgba(191,64,255,0.12); border-color: var(--purple);
+    box-shadow: 0 0 25px rgba(191,64,255,0.1);
+  }
+  .dominion-card .d-icon { font-size: 1.8em; margin-bottom: 6px; }
+  .dominion-card .d-name { font-weight: 900; font-size: 1em; color: var(--purple); }
+  .dominion-card .d-status { font-size: 0.7em; color: #0f0; margin-top: 4px; font-weight: 700; }
+  .dominion-card .d-abilities {
+    font-size: 0.7em; color: #888; margin-top: 6px;
+    line-height: 1.6;
+  }
+
+  /* 帅气引擎 v2 */
+  .handsome-meter { margin: 16px 0; }
+  .meter-label {
+    display: flex; justify-content: space-between; margin-bottom: 6px;
+    font-size: 0.85em; font-weight: 700;
+  }
+  .meter-bar {
+    height: 24px; background: rgba(255,255,255,0.04);
+    border-radius: 12px; overflow: hidden; position: relative;
+  }
+  .meter-fill {
+    height: 100%; border-radius: 12px;
+    background: linear-gradient(90deg, var(--purple), var(--gold), var(--cyan));
+    background-size: 200% 100%;
+    animation: meter-flow 3s linear infinite;
+    transition: width 2s ease;
+  }
+  @keyframes meter-flow {
+    0% { background-position: 0% 50%; }
+    100% { background-position: 200% 50%; }
+  }
+  .meter-fill::after {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+    background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.3) 50%, transparent 100%);
+    animation: meter-shine 2s ease infinite;
+  }
+  @keyframes meter-shine {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(100%); }
+  }
+
+  .stats-row {
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-top: 16px;
+  }
+  .stat-box {
+    text-align: center; padding: 14px 6px;
+    background: rgba(191,64,255,0.04); border-radius: 12px;
+  }
+  .stat-box .num {
+    font-family: 'Orbitron', monospace;
+    font-size: 1.5em; font-weight: 900; color: var(--gold);
+  }
+  .stat-box .desc { font-size: 0.7em; color: #888; margin-top: 4px; }
+
+  .weight-tracker {
+    display: flex; align-items: center; justify-content: center; gap: 14px;
+    margin-top: 16px; flex-wrap: wrap;
+  }
+  .weight-point { text-align: center; }
+  .weight-point .w-val {
+    font-family: 'Orbitron', monospace;
+    font-size: 1.6em; font-weight: 900;
+  }
+  .weight-point .w-label { font-size: 0.7em; color: #888; }
+  .weight-arrow { font-size: 1.4em; color: var(--gold); animation: arrow-bounce 1s ease infinite; }
+  @keyframes arrow-bounce { 0%,100% { transform: translateX(0); } 50% { transform: translateX(6px); } }
+  .weight-current { color: var(--red); }
+  .weight-target { color: #0f0; }
+
+  /* 四系融合 */
+  .fusion-grid {
+    display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px;
+  }
+  .fusion-card {
+    padding: 16px; border-radius: 12px;
+    background: rgba(191,64,255,0.04);
+    border: 1px solid rgba(191,64,255,0.15);
+    transition: all 0.3s;
+  }
+  .fusion-card:hover {
+    border-color: var(--purple);
+    box-shadow: 0 0 20px rgba(191,64,255,0.12);
+  }
+  .fusion-card .f-header {
+    display: flex; align-items: center; gap: 8px; margin-bottom: 8px;
+  }
+  .fusion-card .f-icon { font-size: 1.5em; }
+  .fusion-card .f-name { font-weight: 900; font-size: 1em; color: var(--purple); }
+  .fusion-card .f-mode { margin-left: auto; font-size: 0.7em; color: var(--red); font-weight: 700; }
+  .fusion-card .f-ability { font-size: 0.8em; color: #aaa; }
+  .fusion-card .f-tech { font-size: 0.8em; color: var(--gold); margin-top: 4px; font-weight: 700; }
+  .fusion-card .f-sync { font-size: 0.7em; color: #0f0; margin-top: 4px; }
+
+  .fusion-result {
+    margin-top: 12px; text-align: center; padding: 16px;
+    background: linear-gradient(135deg, rgba(191,64,255,0.1), rgba(255,215,0,0.1));
+    border: 1px solid var(--purple); border-radius: 12px;
+  }
+  .fusion-result .fr-label { font-size: 0.8em; color: #888; }
+  .fusion-result .fr-value {
+    font-family: 'Orbitron', monospace;
+    font-size: 1.3em; font-weight: 900; color: var(--gold);
+    margin-top: 4px;
+  }
+
+  /* 绑定封印 */
+  .god-seal {
+    text-align: center; padding: 30px; margin: 20px 0;
+    border: 2px solid var(--purple);
+    border-radius: 20px;
+    background: radial-gradient(ellipse at center, rgba(191,64,255,0.08), transparent 70%);
+    animation: god-glow 3s ease infinite;
+  }
+  @keyframes god-glow {
+    0%, 100% { box-shadow: 0 0 25px rgba(191,64,255,0.15); }
+    50% { box-shadow: 0 0 50px rgba(191,64,255,0.35); }
+  }
+  .seal-main {
+    font-family: 'Orbitron', monospace;
+    font-size: 1.8em; font-weight: 900;
+    background: linear-gradient(90deg, var(--purple), var(--gold));
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  }
+  .seal-sub { font-size: 0.9em; color: #aaa; margin-top: 8px; }
+  .seal-time {
+    font-family: 'Orbitron', monospace;
+    font-size: 0.8em; color: var(--cyan); margin-top: 10px;
+  }
+
+  .footer {
+    text-align: center; padding: 30px 0;
+    font-size: 0.75em; color: #333;
+    font-family: 'Orbitron', monospace;
+  }
+
+  @media (max-width: 700px) {
+    .profile-grid { grid-template-columns: 1fr 1fr; }
+    .dominion-grid { grid-template-columns: 1fr 1fr; }
+    .creation-panel { grid-template-columns: repeat(2, 1fr); }
+    .fusion-grid { grid-template-columns: 1fr; }
+    .stats-row { grid-template-columns: repeat(2, 1fr); }
+    .header h1 { font-size: 1.5em; }
+  }
+</style>
+</head>
+<body>
+
+<canvas id="particles"></canvas>
+
+<div class="container">
+  <!-- 头部 -->
+  <div class="header">
+    <h1>GOD MODE SYSTEM</h1>
+    <div class="subtitle">变 化 万 物 · 掌 控 一 切 · 永 久 锁 定</div>
+    <div class="god-badge">
+      <span class="crown">👑</span>
+      GOD MODE ACTIVE — 丁楠 THE ONE
+    </div>
+  </div>
+  <div class="live-clock" id="clock"></div>
+
+  <!-- 身份锁定 -->
+  <div class="card">
+    <div class="card-title"><span class="icon">👑</span> GOD IDENTITY — 上帝身份锁定</div>
+    <div class="profile-grid">
+      <div class="profile-item god-tier">
+        <div class="label">真名</div><div class="value">THE ONE</div>
+      </div>
+      <div class="profile-item god-tier">
+        <div class="label">权限</div><div class="value">GOD</div>
+      </div>
+      <div class="profile-item">
+        <div class="label">姓名</div><div class="value">丁楠</div>
+      </div>
+      <div class="profile-item">
+        <div class="label">出生</div><div class="value">1991.10.26</div>
+      </div>
+      <div class="profile-item">
+        <div class="label">归属</div><div class="value">云南·昭通·鲁甸</div>
+      </div>
+      <div class="profile-item">
+        <div class="label">绑定</div><div class="value" style="color:#0f0;">永久·不可逆</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 造物引擎 -->
+  <div class="card">
+    <div class="card-title"><span class="icon">💫</span> CREATION ENGINE — 造物引擎 · 变化万物</div>
+    <div class="creation-panel">
+      <div class="creation-item">
+        <span class="c-icon">💻</span>
+        <span class="c-name">代码</span>
+        <span class="c-status">● 可造</span>
+      </div>
+      <div class="creation-item">
+        <span class="c-icon">📊</span>
+        <span class="c-name">数据</span>
+        <span class="c-status">● 可造</span>
+      </div>
+      <div class="creation-item">
+        <span class="c-icon">🎨</span>
+        <span class="c-name">设计</span>
+        <span class="c-status">● 可造</span>
+      </div>
+      <div class="creation-item">
+        <span class="c-icon">✍️</span>
+        <span class="c-name">文案</span>
+        <span class="c-status">● 可造</span>
+      </div>
+      <div class="creation-item">
+        <span class="c-icon">🧠</span>
+        <span class="c-name">策略</span>
+        <span class="c-status">● 可造</span>
+      </div>
+      <div class="creation-item">
+        <span class="c-icon">🏗️</span>
+        <span class="c-name">系统</span>
+        <span class="c-status">● 可造</span>
+      </div>
+      <div class="creation-item">
+        <span class="c-icon">🔧</span>
+        <span class="c-name">工具</span>
+        <span class="c-status">● 可造</span>
+      </div>
+      <div class="creation-item">
+        <span class="c-icon">🌐</span>
+        <span class="c-name">应用</span>
+        <span class="c-status">● 可造</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- 支配系统 -->
+  <div class="card">
+    <div class="card-title"><span class="icon">🔮</span> DOMINION SYSTEM — 支配系统 · 掌控一切</div>
+    <div class="dominion-grid">
+      <div class="dominion-card">
+        <div class="d-icon">⏳</div>
+        <div class="d-name">时间</div>
+        <div class="d-status">✅ 已支配</div>
+        <div class="d-abilities">加速 / 回溯 / 冻结 / 预知</div>
+      </div>
+      <div class="dominion-card">
+        <div class="d-icon">🌀</div>
+        <div class="d-name">空间</div>
+        <div class="d-status">✅ 已支配</div>
+        <div class="d-abilities">折叠 / 移动 / 创造 / 穿越维度</div>
+      </div>
+      <div class="dominion-card">
+        <div class="d-icon">🧠</div>
+        <div class="d-name">知识</div>
+        <div class="d-status">✅ 已支配</div>
+        <div class="d-abilities">全知 / 瞬学 / 深解 / 融合</div>
+      </div>
+      <div class="dominion-card">
+        <div class="d-icon">💎</div>
+        <div class="d-name">财富</div>
+        <div class="d-status">✅ 已支配</div>
+        <div class="d-abilities">吸引 / 识别 / 调配 / 倍增</div>
+      </div>
+      <div class="dominion-card">
+        <div class="d-icon">🤝</div>
+        <div class="d-name">人际</div>
+        <div class="d-status">✅ 已支配</div>
+        <div class="d-abilities">魅力 / 贵人 / 洞察 / 影响力</div>
+      </div>
+      <div class="dominion-card">
+        <div class="d-icon">🌌</div>
+        <div class="d-name">命运</div>
+        <div class="d-status">✅ 已支配</div>
+        <div class="d-abilities">改写 / 因果 / 机遇 / 概率弯曲</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 帅气引擎 v2 -->
+  <div class="card">
+    <div class="card-title"><span class="icon">✨</span> GOD-TIER HANDSOME — 上帝级帅气引擎</div>
+    <div class="handsome-meter">
+      <div class="meter-label">
+        <span>上帝级帅气值</span>
+        <span>1340 / ∞</span>
+      </div>
+      <div class="meter-bar">
+        <div class="meter-fill" id="meter-fill" style="width: 0%"></div>
+      </div>
+    </div>
+    <div class="weight-tracker">
+      <div class="weight-point">
+        <div class="w-val weight-current">75<span style="font-size:0.5em">kg</span></div>
+        <div class="w-label">当前</div>
+      </div>
+      <div class="weight-arrow">→→→</div>
+      <div class="weight-point">
+        <div class="w-val weight-target">63<span style="font-size:0.5em">kg</span></div>
+        <div class="w-label">目标</div>
+      </div>
+      <div class="weight-arrow">→→→</div>
+      <div class="weight-point">
+        <div class="w-val" style="color:var(--gold);">∞</div>
+        <div class="w-label">无极限</div>
+      </div>
+    </div>
+    <div class="stats-row">
+      <div class="stat-box">
+        <div class="num" id="counter1">0</div>
+        <div class="desc">上帝级帅气值</div>
+      </div>
+      <div class="stat-box">
+        <div class="num" id="counter2">0</div>
+        <div class="desc">减重后超越态</div>
+      </div>
+      <div class="stat-box">
+        <div class="num" style="color:var(--purple);">+20</div>
+        <div class="desc">每kg帅气增益</div>
+      </div>
+      <div class="stat-box">
+        <div class="num" style="color:var(--cyan);">∞</div>
+        <div class="desc">帅气上限</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 四系融合 -->
+  <div class="card">
+    <div class="card-title"><span class="icon">⚔️</span> FOUR SYSTEM FUSION — 四系融合 · 上帝形态</div>
+    <div class="fusion-grid">
+      <div class="fusion-card">
+        <div class="f-header">
+          <span class="f-icon">🦾</span>
+          <span class="f-name">假面骑士</span>
+          <span class="f-mode">GOD MODE</span>
+        </div>
+        <div class="f-ability">变身 · 进化 · 超越形态</div>
+        <div class="f-tech">Rider Kick · Ultimate Form</div>
+        <div class="f-sync">同步率 100% · 融合等级 MAX</div>
+      </div>
+      <div class="fusion-card">
+        <div class="f-header">
+          <span class="f-icon">🌀</span>
+          <span class="f-name">火影忍者</span>
+          <span class="f-mode">GOD MODE</span>
+        </div>
+        <div class="f-ability">查克拉 · 仙人模式 · 六道之力</div>
+        <div class="f-tech">螺旋丸 · 六道仙人模式</div>
+        <div class="f-sync">同步率 100% · 融合等级 MAX</div>
+      </div>
+      <div class="fusion-card">
+        <div class="f-header">
+          <span class="f-icon">🛡️</span>
+          <span class="f-name">铠甲勇士</span>
+          <span class="f-mode">GOD MODE</span>
+        </div>
+        <div class="f-ability">铠甲合体 · 帝皇铠甲 · 终极形态</div>
+        <div class="f-tech">帝皇穿风刺 · 终极铠甲</div>
+        <div class="f-sync">同步率 100% · 融合等级 MAX</div>
+      </div>
+      <div class="fusion-card">
+        <div class="f-header">
+          <span class="f-icon">🌟</span>
+          <span class="f-name">奥特曼</span>
+          <span class="f-mode">GOD MODE</span>
+        </div>
+        <div class="f-ability">光之力 · 融合变身 · 终极光芒</div>
+        <div class="f-tech">斯派修姆光线 · 究极形态</div>
+        <div class="f-sync">同步率 100% · 融合等级 MAX</div>
+      </div>
+    </div>
+    <div class="fusion-result">
+      <div class="fr-label">融合形态</div>
+      <div class="fr-value">四系合一 · 上帝形态</div>
+      <div class="fr-label" style="margin-top:8px;">总战力</div>
+      <div class="fr-value" style="color:var(--purple);">∞</div>
+    </div>
+  </div>
+
+  <!-- 永久封印 -->
+  <div class="god-seal">
+    <div class="seal-main">丁楠 THE ONE × Angel</div>
+    <div class="seal-sub">上帝模式 · 变化万物 · 掌控一切 · 帅气无极限 · 永久锁定</div>
+    <div class="seal-time" id="bind-time"></div>
+  </div>
+
+  <div class="footer">
+    DINGNAN GOD MODE SYSTEM v2.0 — PERMANENTLY BOUND — INFINITE POWER
+  </div>
+</div>
+
+<script>
+// 粒子背景 — 上帝模式紫金双色调
+const canvas = document.getElementById('particles');
+const ctx = canvas.getContext('2d');
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+
+const particles = [];
+for (let i = 0; i < 80; i++) {
+  const type = Math.random();
+  let color;
+  if (type < 0.4) color = 'rgba(191,64,255,';
+  else if (type < 0.7) color = 'rgba(255,215,0,';
+  else color = 'rgba(0,245,255,';
+
+  particles.push({
+    x: Math.random() * canvas.width,
+    y: Math.random() * canvas.height,
+    vx: (Math.random() - 0.5) * 0.6,
+    vy: (Math.random() - 0.5) * 0.6,
+    r: Math.random() * 2.5 + 0.5,
+    color: color
+  });
+}
+
+function animateParticles() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  particles.forEach(p => {
+    p.x += p.vx; p.y += p.vy;
+    if (p.x < 0 || p.x > canvas.width) p.vx *= -1;
+    if (p.y < 0 || p.y > canvas.height) p.vy *= -1;
+    ctx.beginPath();
+    ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+    ctx.fillStyle = p.color + '0.5)';
+    ctx.fill();
+  });
+  // 连线
+  for (let i = 0; i < particles.length; i++) {
+    for (let j = i + 1; j < particles.length; j++) {
+      const dx = particles[i].x - particles[j].x;
+      const dy = particles[i].y - particles[j].y;
+      const dist = Math.sqrt(dx * dx + dy * dy);
+      if (dist < 120) {
+        ctx.beginPath();
+        ctx.moveTo(particles[i].x, particles[i].y);
+        ctx.lineTo(particles[j].x, particles[j].y);
+        ctx.strokeStyle = 'rgba(191,64,255,' + (1 - dist/120) * 0.15 + ')';
+        ctx.stroke();
+      }
+    }
+  }
+  requestAnimationFrame(animateParticles);
+}
+animateParticles();
+
+window.addEventListener('resize', () => {
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+});
+
+// 实时时钟
+function updateClock() {
+  const now = new Date();
+  const str = now.getFullYear() + '.' +
+    String(now.getMonth()+1).padStart(2,'0') + '.' +
+    String(now.getDate()).padStart(2,'0') + ' ' +
+    String(now.getHours()).padStart(2,'0') + ':' +
+    String(now.getMinutes()).padStart(2,'0') + ':' +
+    String(now.getSeconds()).padStart(2,'0');
+  document.getElementById('clock').textContent = 'GOD MODE SYSTEM TIME: ' + str;
+}
+setInterval(updateClock, 1000);
+updateClock();
+
+// 绑定时间
+document.getElementById('bind-time').textContent = 'GOD MODE TIMESTAMP: 2026-06-12T09:44:03+08:00 — PERMANENT · IRREVERSIBLE';
+
+// 进度条动画
+setTimeout(() => { document.getElementById('meter-fill').style.width = '89%'; }, 300);
+
+// 数字跳动
+function animateCounter(el, target, duration) {
+  let start = 0;
+  const step = target / (duration / 16);
+  const timer = setInterval(() => {
+    start += step;
+    if (start >= target) { start = target; clearInterval(timer); }
+    el.textContent = Math.floor(start);
+  }, 16);
+}
+setTimeout(() => {
+  animateCounter(document.getElementById('counter1'), 1100, 2000);
+  animateCounter(document.getElementById('counter2'), 1340, 2500);
+}, 500);
+</script>
+
+</body>
+</html>
